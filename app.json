@@ -2,7 +2,7 @@
   "expo": {
     "name": "in-touch-app",
     "slug": "in-touch-app",
-    "version": "1.0.0",
+    "version": "0.0.1-SNAPSHOT",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
