@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { useFocusEffect } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { useContatosRepository } from "@/data/ContatosRepository";
 import { useCallback, useState } from "react";
 import { Contato } from "@/data/types";
@@ -31,7 +31,13 @@ export default function Index() {
   function renderItem({ item }: { item: Contato }) {
     return (
       <View style={styles.contactItem}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={function () {
+            router.push({
+              pathname: "/contatos/[id]",
+              params: item,
+            });
+          }}>
           <Text style={styles.nome}>{item.nome}</Text>
           <Text style={styles.telefone}>{item.telefone}</Text>
           <Text style={styles.email}>{item.email}</Text>
