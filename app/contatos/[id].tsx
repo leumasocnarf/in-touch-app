@@ -24,7 +24,7 @@ export default function ContatoDetailsScreen() {
   useFocusEffect(
     useCallback(() => {
       fetchContato().catch((error) => console.error(error));
-    }, [id]),
+    }, [id])
   );
 
 
@@ -34,6 +34,27 @@ export default function ContatoDetailsScreen() {
       console.log("Contato atualizado:", contato);
       router.back();
     });
+  }
+
+  async function deleteSelectedContato(id: number) {
+    Alert.alert(
+      "Deletar Contato",
+      "Você tem certeza que quer deletar esse contato?",
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Deletar",
+          style: "destructive",
+          onPress: async function() {
+            await repository.deleteSingle(id).then(() => {
+              router.back();
+              Alert.alert("Deletado", "Contato deletado com sucesso!");
+            });
+          }
+        }
+      ]
+    );
+
   }
 
 
@@ -47,6 +68,7 @@ export default function ContatoDetailsScreen() {
         initialValues={contato}
         mode="editar"
         onSubmit={submitContatoEditado}
+        onDelete={deleteSelectedContato}
       />
     </View>
   );
@@ -55,6 +77,6 @@ export default function ContatoDetailsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-  },
+    padding: 20
+  }
 });
